@@ -42,6 +42,10 @@ class Redis extends AbstractService
             throw new \Exception('Unable to connect to Redis server');
         }
 
+        if (isset($settings['database'])) {
+            $redis->select($settings['database']);
+        }
+
         if (isset($settings['prefix'])) {
             $redis->setOption(\Redis::OPT_PREFIX, $settings['prefix'] . ':');
         }
